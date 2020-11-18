@@ -513,16 +513,6 @@
                                     </div>
                                 </li>
                             @endif
-                            <li class="site-menu-section site-menu-item ">
-
-
-                                <a class="animsition-link" href="{{url('projects')}}">
-                                    <i class="site-menu-icon  fa fa-list" aria-hidden="true"></i>
-                                    <span class="site-menu-title">Project Management</span>
-
-                                </a>
-                            </li>
-
 
                             {{-- <li class="site-menu-section site-menu-item ">
 
