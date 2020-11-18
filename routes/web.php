@@ -20,7 +20,10 @@ use App\Workflow;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/artisan',function(){
-   \Artisan::call('migrate');
+    $pc=\App\PermissionCategory::updateorcreate(['name'=>'Import']);
+    $permission_1=\App\Permission::create(['permission_category_id'=>$pc->id,'constant'=>'manage_import','name'=>'Manage Import']);
+
+    //\Artisan::call('migrate');
 });
 Route::get('/registration-progress', 'CompanyOnboardingController@index')->name('coi')->middleware(['auth']);
 Route::post('/company_registration', 'CompanyOnboardingController@register')->name('register_company');
