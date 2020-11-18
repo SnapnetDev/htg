@@ -945,66 +945,6 @@
 
     });
 
-
-    var BotfuelWebChat =
-        {
-            init: function (options) {
-
-                if (typeof BotChat != 'undefined') {
-                    const params = BotChat.queryParams(location.search);
-                    var div = document.createElement('div');
-                    div.id = 'bot';
-                    div.style.width = options.size.width + "px";
-                    div.style.height = options.size.height + "px";
-                    div.style.position = "relative";
-                    document.body.appendChild(div);
-
-                    BotChat.App({
-                        bot: {id: 'botid'},
-                        locale: params['locale'],
-                        resize: 'detect',
-                        user: {id: 'userid'},
-                        directLine: {
-                            secret: options.appSecret,
-                            token: options.appToken
-                        }
-                    }, div);
-
-
-                }
-            }
-        };
-
-
-    //
-    (function () {
-
-
-        var div = document.createElement("div");
-        document.getElementsByTagName('body')[0].appendChild(div);
-        div.outerHTML = "<div id='botDiv' class='no-print' style='font-family: comic sans ms; height: 38px; position: fixed; bottom: 0; right: 0; z-index: 1000; background-color: #fff; float-right; border-radius:8px'><div id='botTitleBar' style='height: 45px; width: 600px; position:fixed; cursor: pointer; background-color: #03a9f4; color: #fff; padding: 8px 15px; font-size: default'></div><iframe width='350px' height='400px' style='font-family: comic sans ms;' src='https://webchat.botframework.com/embed/HCMatrix?s=X8Ns5_V16cw.gUa0xNXRkN2gfikioA6kH5ZQ5vyXnAF6IxuDaQGm7uo'></iframe></div>";
-
-        document.querySelector('body').addEventListener('click', function (e) {
-            e.target.matches = e.target.matches || e.target.msMatchesSelector;
-            if (e.target.matches('#botTitleBar')) {
-                var botDiv = document.querySelector('#botDiv');
-                botDiv.style.height = botDiv.style.height == '400px' ? '38px' : '400px';
-            }
-            ;
-        });
-
-        $('#botTitleBar').html('HCMatrix Bot')
-
-
-    })();
-
-    BotfuelWebChat.init(
-        {
-            appToken: 'directline secret',
-            size: {width: 500, height: 600}
-        })
-
-
 </script>
 <script type="text/javascript">
     $(function () {
