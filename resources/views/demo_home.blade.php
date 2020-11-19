@@ -177,7 +177,7 @@
           <div class="col-xl-3 col-md-6 col-xs-12 info-panel marg">
             <div class="card card-shadow card-shadow1">
               <div class="card-block bg-white p-30">
-                <a href="https://primeatlantic.sharepoint.com" type="button" class="btn btn-floating btn-sm btn-info">
+                <a href="https://sharepoint.com" type="button" class="btn btn-floating btn-sm btn-info">
                   <i class="fa fa-share-alt"></i>
                 </a>
                 <span class="m-l-15 font-weight-400 text-info">Sharepoint</span>
