@@ -7,6 +7,7 @@ use App\Dependant;
 use App\Notifications\NewUserCreatedNotify;
 use App\Qualification;
 use App\RegistrationProgress;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Auth;
 use Excel;
@@ -20,30 +21,30 @@ use App\Grade;
 
 
 trait ImportTrait {
-	public $allowed=['xls','xlsx','csv'];
-	public function processGet($route,Request $request){
-		switch ($route) {
-			case 'employees':
-				# code...
-				return $this->viewEmployeesImport($request);
-				break;
-			case 'departments':
-				# code...
-				return $this->viewDepartmentsImport($request);
-				break;
-			case 'branches':
-				# code...
-				return $this->viewBranchesImport($request);
-				break;
-			case 'jobroles':
-				# code...
-				return $this->viewJobrolesImport($request);
-				break;
-			case 'grades':
-				# code...
-				return $this->viewGradesImport($request);
-				break;
-				case 'update_dob':
+    public $allowed=['xls','xlsx','csv'];
+    public function processGet($route,Request $request){
+        switch ($route) {
+            case 'employees':
+                # code...
+                return $this->viewEmployeesImport($request);
+                break;
+            case 'departments':
+                # code...
+                return $this->viewDepartmentsImport($request);
+                break;
+            case 'branches':
+                # code...
+                return $this->viewBranchesImport($request);
+                break;
+            case 'jobroles':
+                # code...
+                return $this->viewJobrolesImport($request);
+                break;
+            case 'grades':
+                # code...
+                return $this->viewGradesImport($request);
+                break;
+            case 'update_dob':
                 # code...
                 return $this->viewUpdateDobImport($request);
                 break;
@@ -79,388 +80,388 @@ trait ImportTrait {
                 # code...
                 return $this->downloadWorkExperienceTemplate($request);
                 break;
-			default:
-				# code...
-				break;
-		}
+            default:
+                # code...
+                break;
+        }
 
-	}
+    }
 
 
-	public function processPost(Request $request){
-		// try{
-		switch ($request->type) {
-			case 'employees':
-				# code...
-				return $this->importEmployees($request);
-				break;
-			case 'departments':
-				# code...
-				return $this->importDepartments($request);
-				break;
-			case 'branches':
-				# code...
-				return $this->importBranches($request);
-				break;
-			case 'jobroles':
-				# code...
-				return $this->importJobroles($request);
-				break;
-			case 'grades':
-				# code...
-				return $this->importGrades($request);
-				break;
+    public function processPost(Request $request){
+        // try{
+        switch ($request->type) {
+            case 'employees':
+                # code...
+                return $this->importEmployees($request);
+                break;
+            case 'departments':
+                # code...
+                return $this->importDepartments($request);
+                break;
+            case 'branches':
+                # code...
+                return $this->importBranches($request);
+                break;
+            case 'jobroles':
+                # code...
+                return $this->importJobroles($request);
+                break;
+            case 'grades':
+                # code...
+                return $this->importGrades($request);
+                break;
             case 'dependents':
                 # code...
                 return $this->importDependants($request);
                 break;
-				case 'update_dob':
+            case 'update_dob':
                 # code...
                 return $this->importDob($request);
                 break;
 
 
-			default:
-				# code...
-				break;
-		}
-		// }
-		// catch(\Exception $ex){
-		// 	return response()->json(['status'=>'error','message'=>$ex->getMessage()]);
-		// }
-	}
+            default:
+                # code...
+                break;
+        }
+        // }
+        // catch(\Exception $ex){
+        // 	return response()->json(['status'=>'error','message'=>$ex->getMessage()]);
+        // }
+    }
 
 
 
-	public function viewEmployeesImport(Request $request)
-	{
-		$companies=Company::all();
-         return view('import.employees',compact('companies'));
-	}
-	public function viewDepartmentsImport(Request $request)
-	{
-		$companies=Company::all();
-         return view('import.departments',compact('companies'));
-	}
-	public function viewBranchesImport(Request $request)
-	{
-		$companies=Company::all();
-         return view('import.branches',compact('companies'));
-	}
-	public function viewJobrolesImport(Request $request)
-	{
-		$companies=Company::all();
-         return view('import.jobroles',compact('companies'));
-	}
-	public function viewGradesImport(Request $request)
-	{
-		$companies=Company::all();
-         return view('import.grades',compact('companies'));
-	}
-	 public function viewUpdateDobImport(Request $request)
+    public function viewEmployeesImport(Request $request)
+    {
+        $companies=Company::all();
+        return view('import.employees',compact('companies'));
+    }
+    public function viewDepartmentsImport(Request $request)
+    {
+        $companies=Company::all();
+        return view('import.departments',compact('companies'));
+    }
+    public function viewBranchesImport(Request $request)
+    {
+        $companies=Company::all();
+        return view('import.branches',compact('companies'));
+    }
+    public function viewJobrolesImport(Request $request)
+    {
+        $companies=Company::all();
+        return view('import.jobroles',compact('companies'));
+    }
+    public function viewGradesImport(Request $request)
+    {
+        $companies=Company::all();
+        return view('import.grades',compact('companies'));
+    }
+    public function viewUpdateDobImport(Request $request)
     {
         $companies = Company::all();
         return view('import.update-dob', compact('companies'));
     }
 
-	public function importEmpGrade(Request $request)
-	{
-		$document = $request->file('template');
-		 //$document->getRealPath();
-		// return $document->getClientOriginalName();
-		// $document->getClientOriginalExtension();
-		// $document->getSize();
-		// $document->getMimeType();
+    public function importEmpGrade(Request $request)
+    {
+        $document = $request->file('template');
+        //$document->getRealPath();
+        // return $document->getClientOriginalName();
+        // $document->getClientOriginalExtension();
+        // $document->getSize();
+        // $document->getMimeType();
 
 
-                	$company=Company::find($request->company_id);
+        $company=Company::find($request->company_id);
 
-		 if($request->hasFile('template')){
+        if($request->hasFile('template')){
             Excel::load($request->file('template')->getRealPath(), function ($reader) use ($company) {
-            	$array=$reader->toArray();
+                $array=$reader->toArray();
                 foreach ($reader->toArray() as $key => $row) {
-                	$old_user=User::where('emp_num',$row['staff_id'])->first();
-                	$grade=Grade::where('level',$row['grade'])->first();
-				       if ($grade && $old_user) {
+                    $old_user=User::where('emp_num',$row['staff_id'])->first();
+                    $grade=Grade::where('level',$row['grade'])->first();
+                    if ($grade && $old_user) {
 
-				       $hist=$old_user->promotionHistories()->first();
+                        $hist=$old_user->promotionHistories()->first();
 
-				       if ($hist) {
-				       	$hist->update(['approved_by'=>Auth::user()->id,'approved_on'=>date('Y-m-d'),'old_grade_id'=>$grade->id,'grade_id'=>$grade->id]);
-				       	$old_user->grade_id=$grade->id;
-				       	$old_user->save();
-				       }else{
-				       	$old_user->promotionHistories()->create(['approved_by'=>Auth::user()->id,'approved_on'=>date('Y-m-d'),'old_grade_id'=>$grade->id,'grade_id'=>$grade->id]);
-				       	$old_user->grade_id=$grade->id;
-				       	$old_user->save();
-				       }
-				   }
-				}
-			});
+                        if ($hist) {
+                            $hist->update(['approved_by'=>Auth::user()->id,'approved_on'=>date('Y-m-d'),'old_grade_id'=>$grade->id,'grade_id'=>$grade->id]);
+                            $old_user->grade_id=$grade->id;
+                            $old_user->save();
+                        }else{
+                            $old_user->promotionHistories()->create(['approved_by'=>Auth::user()->id,'approved_on'=>date('Y-m-d'),'old_grade_id'=>$grade->id,'grade_id'=>$grade->id]);
+                            $old_user->grade_id=$grade->id;
+                            $old_user->save();
+                        }
+                    }
+                }
+            });
 
 
-          $request->session()->flash('success', 'Import was successful!');
+            $request->session()->flash('success', 'Import was successful!');
 
-        return back();
+            return back();
         }
 
-	}
+    }
 
-	public function importEmployees(Request $request)
-	{
-		$document = $request->file('template');
+    public function importEmployees(Request $request)
+    {
+        $document = $request->file('template');
 
-                	 $company=Company::find(companyId());
+        $company=Company::find(companyId());
 
-		 if($request->hasFile('template')){
-             $datas = \Excel::load($request->file('template')->getrealPath(), function ($reader) {
+        if($request->hasFile('template')){
+            $datas = \Excel::load($request->file('template')->getrealPath(), function ($reader) {
 
-             })->get();
+            })->get();
 
-             foreach($datas[0] as $row){
-                 $branch=Branch::where('name', 'like', '%'.$row['branch'].'%')->where('company_id',$company->id)->first();
-                 $gender = ($row['gender'] == 'Male') ? 'M' : ($row['gender'] == 'Female' ? 'F' : '');
-                 $confirmation_status = ($row['confirmation_status'] == 'Probation') ? '0' : ($row['confirmation_status'] == 'Confirmed' ? '1' : '2');
-                 $company_id=$company->id;
-                 $job=Job::where('title', 'like', '%'.$row['current_job_role'].'%')->whereHas('department',function($query) use($company_id){
-                     $query->where('departments.company_id',$company_id);
-                 })->first();
-                  $grade=Grade::where('level',$row['grade'])->first();
-                 $bank=Bank::where('bank_name', 'like', '%'.$row['bank'].'%')->first();
-                 $old_user=User::where('emp_num',$row['staffid'])->first();
+            foreach($datas as $row){
+                $branch=Branch::where('name', 'like', '%'.$row['branch'].'%')->where('company_id',$company->id)->first();
+                $gender = ($row['gender'] == 'Male') ? 'M' : ($row['gender'] == 'Female' ? 'F' : '');
+                $confirmation_status = ($row['confirmation_status'] == 'Probation') ? '0' : ($row['confirmation_status'] == 'Confirmed' ? '1' : '2');
+                $company_id=$company->id;
+                $job=Job::where('title', 'like', '%'.$row['current_job_role'].'%')->whereHas('department',function($query) use($company_id){
+                    $query->where('departments.company_id',$company_id);
+                })->first();
+                $grade=Grade::where('level',$row['grade'])->first();
+                $bank=Bank::where('bank_name', 'like', '%'.$row['bank'].'%')->first();
+                $old_user=User::where('emp_num',$row['staffid'])->first();
 
-                 if (!$old_user) {
+                if (!$old_user && isset($row['staffid'])) {
 
-                     $user=User::create(['name'=>$row['firstname'].' '.$row['lastname'],'email'=>$row['email'],'phone'=>$row['phone'],'emp_num'=>$row['staffid'],'sex'=>$gender,
-                         'address'=>$row['address'],'marital_status'=>$row['marital_status'],'dob'=>$row['date_of_birth'],'branch_id'=>($branch ?$branch->id : 0),
-                         'grade_id'=>($grade ?$grade->id : 0),
-                         'bank_id'=>($bank ?$bank->id : 0),'job_id'=>($job ?$job->id : 0),'status'=>$confirmation_status,'bank_account_no'=>$row['account_number'],
-                         'company_id'=>$company->id,'hiredate'=>$row['hiredate'],'confirmation_date'=>$row['date_confirmed'],'role_id'=>4]);
-                     $user->notify(new NewUserCreatedNotify($user));
-                     $user_temp=\App\UserTemp::updateOrCreate(['user_id'=>$user->id],$user->toArray());
-                     if ($row['next_of_kin']!='' && $row['relationship']!='') {
+                    $user=User::create(['name'=>$row['firstname'].' '.$row['lastname'],'email'=>$row['email'],'phone'=>$row['phone'],'emp_num'=>$row['staffid'],'sex'=>$gender,
+                        'address'=>$row['address'],'marital_status'=>$row['marital_status'],'dob'=>isset($row['date_of_birth']) ? Carbon::parse($row['date_of_birth'])->format('Y-m-d'):'','branch_id'=>($branch ?$branch->id : 0),
+                        'grade_id'=>($grade ?$grade->id : 0),
+                        'bank_id'=>($bank ?$bank->id : 0),'job_id'=>($job ?$job->id : 0),'status'=>$confirmation_status,'bank_account_no'=>$row['account_number'],
+                        'company_id'=>$company->id,'hiredate'=>isset($row['hiredate']) ? Carbon::parse($row['hiredate'])->format('Y-m-d'):'','confirmation_date'=>isset($row['date_confirmed']) ? Carbon::parse($row['date_confirmed'])->format('Y-m-d'):'','role_id'=>4]);
+                    //$user->notify(new NewUserCreatedNotify($user));
+                    //$user_temp=\App\UserTemp::updateOrCreate(['user_id'=>$user->id],$user->toArray());
+                    if ($row['next_of_kin']!='' && $row['relationship']!='') {
 
-                         $nok=\App\Nok::create(['name'=>$row['next_of_kin'],'phone'=>$row['phone_of_next_of_kin'],'address'=>$row['address_of_next_of_kin'],'relationship'=>strtolower($row['relationship']),'user_id'=>$user->id]);
-                     }
+                        $nok=\App\Nok::create(['name'=>$row['next_of_kin'],'phone'=>$row['phone_of_next_of_kin'],'address'=>$row['address_of_next_of_kin'],'relationship'=>strtolower($row['relationship']),'user_id'=>$user->id]);
+                    }
 
-                     if ($grade) {
+                    if ($grade) {
 
-                         $user->promotionHistories()->create(['approved_by'=>Auth::user()->id,'approved_on'=>date('Y-m-d'),'old_grade_id'=>$grade->id,'grade_id'=>$grade->id]);
-                     }
-                     if($job){
-                         $user->jobs()->attach($job->id,['started'=>date('Y-m-d')]);
-                     }
-                 }else{
-                     $old_user->update(['name'=>$row['firstname'].' '.$row['lastname'],'email'=>$row['email'],'phone'=>$row['phone'],'sex'=>$gender,
-                         'address'=>$row['address'],'marital_status'=>$row['marital_status'],'dob'=>$row['date_of_birth'],'branch_id'=>($branch ?$branch->id : 0),
+                        $user->promotionHistories()->create(['approved_by'=>Auth::user()->id,'approved_on'=>date('Y-m-d'),'old_grade_id'=>$grade->id,'grade_id'=>$grade->id]);
+                    }
+                    if($job){
+                        $user->jobs()->attach($job->id,['started'=>date('Y-m-d')]);
+                    }
+                }else{
+                    $old_user->update(['name'=>$row['firstname'].' '.$row['lastname'],'email'=>$row['email'],'phone'=>$row['phone'],'sex'=>$gender,
+                        'address'=>$row['address'],'marital_status'=>$row['marital_status'],'dob'=>$row['date_of_birth'],'branch_id'=>($branch ?$branch->id : 0),
 
-                         'bank_id'=>($bank ?$bank->id : 0),'status'=>$confirmation_status,'bank_account_no'=>$row['account_number'],
-                         'company_id'=>$company->id,'hiredate'=>$row['hiredate'],'confirmation_date'=>$row['date_confirmed']]);
-
-
-                     if ($row['next_of_kin']!='' && $row['relationship']!='') {
-
-                         \App\Nok::updateOrCreate(
-                             ['user_id' => $old_user->id],
-                             ['name'=>$row['next_of_kin'],'phone'=>$row['phone_of_next_of_kin'],'address'=>$row['address_of_next_of_kin'],'relationship'=>strtolower($row['relationship']),'user_id'=>$old_user->id]
-                         );
+                        'bank_id'=>($bank ?$bank->id : 0),'status'=>$confirmation_status,'bank_account_no'=>$row['account_number'],
+                        'company_id'=>$company->id,'hiredate'=>$row['hiredate'],'confirmation_date'=>$row['date_confirmed']]);
 
 
-                     }
+                    if ($row['next_of_kin']!='' && $row['relationship']!='') {
 
-                 }
+                        \App\Nok::updateOrCreate(
+                            ['user_id' => $old_user->id],
+                            ['name'=>$row['next_of_kin'],'phone'=>$row['phone_of_next_of_kin'],'address'=>$row['address_of_next_of_kin'],'relationship'=>strtolower($row['relationship']),'user_id'=>$old_user->id]
+                        );
 
 
-             }
+                    }
+
+                }
+
+
+            }
 
 
 //          $request->session()->flash('success', 'Import was successful!');
-             if($request->source=='onboarding'){
+            if($request->source=='onboarding'){
                 $this->update_reg_progress('has_users');
 
-                 return back()->with(['success'=>'Employees Import was successful']);
-             }
-        return 'success';
+                return back()->with(['success'=>'Employees Import was successful']);
+            }
+            return 'success';
         }else{
-             return back()->with(['error'=>'Employees could not be imported']);
-         }
+            return back()->with(['error'=>'Employees could not be imported']);
+        }
 
 
-	}
-	public function importDepartments(Request $request)
-	{
-		$document = $request->file('template');
-		$company=Company::find(companyId());
-		 if($request->hasFile('template')){
-             $datas = \Excel::load($request->file('template')->getrealPath(), function ($reader) {
+    }
+    public function importDepartments(Request $request)
+    {
+        $document = $request->file('template');
+        $company=Company::find(companyId());
+        if($request->hasFile('template')){
+            $datas = \Excel::load($request->file('template')->getrealPath(), function ($reader) {
 
-             })->get();
+            })->get();
 
-             foreach($datas as $row){
-                 $dept=Department::where(['name'=>$row['name'],'company_id'=>companyId()])->first();
-                 if (!$dept) {
-                     Department::create(['name'=>$row['name'],'company_id'=>$company->id]);
-                 }
-             }
+            foreach($datas as $row){
+                $dept=Department::where(['name'=>$row['name'],'company_id'=>companyId()])->first();
+                if (!$dept) {
+                    Department::create(['name'=>$row['name'],'company_id'=>$company->id]);
+                }
+            }
 
-             if($request->source=='onboarding'){
-                 $this->update_reg_progress('has_departments');
+            if($request->source=='onboarding'){
+                $this->update_reg_progress('has_departments');
 
-                 return back()->with(['success'=>'Department Import was successful']);
-             }
+                return back()->with(['success'=>'Department Import was successful']);
+            }
             return 'success';
 //          $request->session()->flash('success', 'Import was successful!');
 
 //        return back();
         }else{
-             return back()->with(['error'=>'Departments could not be imported']);
-         }
+            return back()->with(['error'=>'Departments could not be imported']);
+        }
 
 
-	}
+    }
 
-	public function importBranches(Request $request)
-	{
-		$document = $request->file('template');
-		$company=Company::find(companyId());
+    public function importBranches(Request $request)
+    {
+        $document = $request->file('template');
+        $company=Company::find(companyId());
 
 
-		 if($request->hasFile('template')){
-             $datas = \Excel::load($request->file('template')->getrealPath(), function ($reader) {
-             })->get();
+        if($request->hasFile('template')){
+            $datas = \Excel::load($request->file('template')->getrealPath(), function ($reader) {
+            })->get();
 
-             foreach($datas as $row){
-                 $branch=Branch::where(['name'=>$row['branch_name'],'company_id'=>companyId()])->first();
-                 if (!$branch) {
-                     Branch::create(['name'=>$row['branch_name'],'company_id'=>$company->id,'address'=>$row['branch_address'],'email'=>$row['branch_email']]);
-                 }
-             }
-             if($request->source=='onboarding'){
-                 $this->update_reg_progress('has_branches');
+            foreach($datas as $row){
+                $branch=Branch::where(['name'=>$row['branch_name'],'company_id'=>companyId()])->first();
+                if (!$branch) {
+                    Branch::create(['name'=>$row['branch_name'],'company_id'=>$company->id,'address'=>$row['branch_address'],'email'=>$row['branch_email']]);
+                }
+            }
+            if($request->source=='onboarding'){
+                $this->update_reg_progress('has_branches');
 
-                 return back()->with(['success'=>'Branch Import was successful']);
-             }
+                return back()->with(['success'=>'Branch Import was successful']);
+            }
 
             return 'success';
 //          $request->session()->flash('success', 'Import was successful!');
 
 //        return back();
         }else{
-             return back()->with(['error'=>'Branches could not be imported']);
-         }
+            return back()->with(['error'=>'Branches could not be imported']);
+        }
 
 
-	}
+    }
 
-	public function importJobroles(Request $request)
-	{
-		$document = $request->file('template');
-		$company=Company::find($request->company_id);
+    public function importJobroles(Request $request)
+    {
+        $document = $request->file('template');
+        $company=Company::find($request->company_id);
 
 
-		 if($request->hasFile('template')){
-             $datas = \Excel::load($request->file('template')->getrealPath(), function ($reader) {
+        if($request->hasFile('template')){
+            $datas = \Excel::load($request->file('template')->getrealPath(), function ($reader) {
 
-             })->get();
+            })->get();
 
-             foreach($datas[0] as $row){
-            		 $department=Department::where(['name'=>$row['department'],'company_id'=>companyId()])->first();
-            		if ($department) {
-            			$job=Job::where(['title'=>$row['title'],'department_id'=>$department->id])->first();
-            			if (!$job) {
-            				 $qualification=\App\Qualification::where(['name'=>$row['qualification']])->first();
-            				Job::create(['title'=>$row['title'],'department_id'=>$department->id,'description'=>$row['description'],'qualification_id'=>$qualification->id]);
-            			}elseif($job){
-            					$job->update(['description'=>$row['description']]);
-            				}
+            foreach($datas[0] as $row){
+                $department=Department::where(['name'=>$row['department'],'company_id'=>companyId()])->first();
+                if ($department) {
+                    $job=Job::where(['title'=>$row['title'],'department_id'=>$department->id])->first();
+                    if (!$job) {
+                        $qualification=\App\Qualification::where(['name'=>$row['qualification']])->first();
+                        Job::create(['title'=>$row['title'],'department_id'=>$department->id,'description'=>$row['description'],'qualification_id'=>$qualification->id]);
+                    }elseif($job){
+                        $job->update(['description'=>$row['description']]);
+                    }
 
-            		}
+                }
 
-						 }
-             if($request->source=='onboarding'){
-                 $this->update_reg_progress('has_job_roles');
-                 return back()->with(['success'=>'Job Roles Import was successful']);
-             }
+            }
+            if($request->source=='onboarding'){
+                $this->update_reg_progress('has_job_roles');
+                return back()->with(['success'=>'Job Roles Import was successful']);
+            }
 
-             return 'success';
+            return 'success';
 
 //          $request->session()->flash('success', 'Import was successful!');
 //
 //        return back();
         }else{
-             return back()->with(['error'=>'Job Roles could not be imported']);
-         }
-
-	}
-
-	public function importUserRoles(Request $request)
-	{
-		$document = $request->file('template');
-		$company=Company::find($request->company_id);
-		 //$document->getRealPath();
-		// return $document->getClientOriginalName();
-		// $document->getClientOriginalExtension();
-		// $document->getSize();
-		// $document->getMimeType();
-
-
-		 if($request->hasFile('template')){
-            Excel::load($request->file('template')->getRealPath(), function ($reader) use($company) {
-
-            	foreach ($reader->toArray() as $key => $row) {
-            		 // $hiredate=\Carbon\Carbon::createFromFormat('d/m/Y', $row['hiredate'])->toDateTimeString();
-            		if ($row['jobid']) {
-            			$job=\App\Job::find($row['jobid']);
-            			$user=\App\User::where(['emp_num'=>$row['staff_id']])->first();
-            			$user->jobs()->attach($job->id);
-            			$user->job_id=$job->id;
-            			$user->department_id=$job->department->id;
-            			$user->save();
-            		}
-
-
-						 }
-            });
-
-          $request->session()->flash('success', 'Import was successful!');
-
-        return back();
+            return back()->with(['error'=>'Job Roles could not be imported']);
         }
 
-	}
+    }
 
-	public function importGrades(Request $request)
-	{
+    public function importUserRoles(Request $request)
+    {
+        $document = $request->file('template');
+        $company=Company::find($request->company_id);
+        //$document->getRealPath();
+        // return $document->getClientOriginalName();
+        // $document->getClientOriginalExtension();
+        // $document->getSize();
+        // $document->getMimeType();
 
-		// $document = $request->file('template');
-		$company=Company::find(companyId());
-		 if($request->hasFile('template')){
-             $datas = \Excel::load($request->file('template')->getrealPath(), function ($reader) {
-             })->get();
 
-             foreach($datas as $row){
-                 $grade=Grade::where('level',$row['level'])->where('company_id',$company->id)->first();
-                 if (!$grade) {
-                     Grade::create(['level'=>$row['level'],'leave_length'=>$row['leave_length'],'basic_pay'=>$row['monthly_gross'],'company_id'=>$company->id]);
-                 }
-             }
+        if($request->hasFile('template')){
+            Excel::load($request->file('template')->getRealPath(), function ($reader) use($company) {
+
+                foreach ($reader->toArray() as $key => $row) {
+                    // $hiredate=\Carbon\Carbon::createFromFormat('d/m/Y', $row['hiredate'])->toDateTimeString();
+                    if ($row['jobid']) {
+                        $job=\App\Job::find($row['jobid']);
+                        $user=\App\User::where(['emp_num'=>$row['staff_id']])->first();
+                        $user->jobs()->attach($job->id);
+                        $user->job_id=$job->id;
+                        $user->department_id=$job->department->id;
+                        $user->save();
+                    }
+
+
+                }
+            });
+
+            $request->session()->flash('success', 'Import was successful!');
+
+            return back();
+        }
+
+    }
+
+    public function importGrades(Request $request)
+    {
+
+        // $document = $request->file('template');
+        $company=Company::find(companyId());
+        if($request->hasFile('template')){
+            $datas = \Excel::load($request->file('template')->getrealPath(), function ($reader) {
+            })->get();
+
+            foreach($datas as $row){
+                $grade=Grade::where('level',$row['level'])->where('company_id',$company->id)->first();
+                if (!$grade) {
+                    Grade::create(['level'=>$row['level'],'leave_length'=>$row['leave_length'],'basic_pay'=>$row['monthly_gross'],'company_id'=>$company->id]);
+                }
+            }
             if($request->source=='onboarding'){
                 $this->update_reg_progress('has_grades');
                 return back()->with(['success'=>'Grade Import was successful']);
             }
-             return 'success';
+            return 'success';
 
         }else{
-             return back()->with(['error'=>'Grade could not be imported']);
-         }
+            return back()->with(['error'=>'Grade could not be imported']);
+        }
 
-	}
+    }
     public function importDependants(Request $request)
     {
         // $document = $request->file('template');
         $company=Company::find(companyId());
         if($request->hasFile('template')){
-             $datas = \Excel::load($request->file('template')->getrealPath(), function ($reader) {
+            $datas = \Excel::load($request->file('template')->getrealPath(), function ($reader) {
             })->get();
 
             foreach($datas[0] as $row){
@@ -476,7 +477,7 @@ trait ImportTrait {
         }
 
     }
-	public function importDob(Request $request)
+    public function importDob(Request $request)
     {
         $document = $request->file('template');
         $company = Company::find($request->company_id);
@@ -498,9 +499,9 @@ trait ImportTrait {
                         $user = \App\User::where(['emp_num' => $row['staff_id']])->first();
                         if($user){
                             try{
-                            $user->dob = $row['email'];
-                            // $user->hiredate = $row['hiredate'];
-                            $user->save();
+                                $user->dob = $row['email'];
+                                // $user->hiredate = $row['hiredate'];
+                                $user->save();
                             }catch(\Exception $e){
                                 return 'error';
                             }
@@ -550,7 +551,7 @@ trait ImportTrait {
         $departments = Department::select('id','name')->where('company_id',companyId())->get()->toArray();
         $qualifications = Qualification::select('id','name')->get()->toArray();
 
-                return $this->exportToExcelDropDown('Job Roles Template',
+        return $this->exportToExcelDropDown('Job Roles Template',
             ['Job Roles' => [$first_row, ''],'departments' => [$departments, 'B'],'qualifications' => [$qualifications, 'C','qualifications']]
         );
     }
@@ -642,38 +643,38 @@ trait ImportTrait {
                     $last = collect($data)->last();
                     $sheet->fromArray($realdata[0]);
                     if(count($data)>1){
-                    if ($sheetname == $last[2]) {
+                        if ($sheetname == $last[2]) {
 
-                        $i = 1;
-                        foreach ($data as $key => $data) {
-                            $Cell = $data[1];
-                            if ($data[1] != '') {
+                            $i = 1;
+                            foreach ($data as $key => $data) {
+                                $Cell = $data[1];
+                                if ($data[1] != '') {
 
-                                $sheet->_parent->addNamedRange(
-                                    new \PHPExcel_NamedRange(
-                                        "sd{$data[1]}", $sheet->_parent->getSheet($i), "B2:B" . $sheet->_parent->getSheet($i)->getHighestRow()
-                                    )
-                                );
-                                $i++;
-                                for ($j = 2; $j <= 500; $j++) {
+                                    $sheet->_parent->addNamedRange(
+                                        new \PHPExcel_NamedRange(
+                                            "sd{$data[1]}", $sheet->_parent->getSheet($i), "B2:B" . $sheet->_parent->getSheet($i)->getHighestRow()
+                                        )
+                                    );
+                                    $i++;
+                                    for ($j = 2; $j <= 500; $j++) {
 
-                                    $objValidation = $sheet->_parent->getSheet(0)->getCell("{$data[1]}$j")->getDataValidation();
-                                    $objValidation->setType(\PHPExcel_Cell_DataValidation::TYPE_LIST);
-                                    $objValidation->setErrorStyle(\PHPExcel_Cell_DataValidation::STYLE_INFORMATION);
-                                    $objValidation->setAllowBlank(false);
-                                    $objValidation->setShowInputMessage(true);
-                                    $objValidation->setShowErrorMessage(true);
-                                    $objValidation->setShowDropDown(true);
-                                    $objValidation->setErrorTitle('Input error');
-                                    $objValidation->setError('Value is not in list.');
-                                    $objValidation->setPromptTitle('Pick from list');
-                                    // $objValidation->setPrompt('Please pick a value from the drop-down list.');
-                                    $objValidation->setFormula1("sd{$data[1]}");
+                                        $objValidation = $sheet->_parent->getSheet(0)->getCell("{$data[1]}$j")->getDataValidation();
+                                        $objValidation->setType(\PHPExcel_Cell_DataValidation::TYPE_LIST);
+                                        $objValidation->setErrorStyle(\PHPExcel_Cell_DataValidation::STYLE_INFORMATION);
+                                        $objValidation->setAllowBlank(false);
+                                        $objValidation->setShowInputMessage(true);
+                                        $objValidation->setShowErrorMessage(true);
+                                        $objValidation->setShowDropDown(true);
+                                        $objValidation->setErrorTitle('Input error');
+                                        $objValidation->setError('Value is not in list.');
+                                        $objValidation->setPromptTitle('Pick from list');
+                                        // $objValidation->setPrompt('Please pick a value from the drop-down list.');
+                                        $objValidation->setFormula1("sd{$data[1]}");
 
+                                    }
                                 }
                             }
                         }
-                    }
                     }
                 });
 

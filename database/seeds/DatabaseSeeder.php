@@ -13,8 +13,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(AssignCompanySeeder::class);
-//        $this->call(NotificationTypeSeeder::class);
-//        $this->call(PollSeeder::class);
-        $this->call(ImportSeeder::class);
+        $this->call(NotificationTypeSeeder::class);
+        $this->call(PollSeeder::class);
+        //$this->call(ImportSeeder::class);
     }
 }
