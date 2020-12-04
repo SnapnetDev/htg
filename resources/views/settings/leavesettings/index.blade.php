@@ -50,7 +50,7 @@
                         @forelse($leaves as $leave)
                             <tr>
                                 <td>{{$leave->name}}</td>
-                                <td>{{$leave->length}}</td>
+                                <td>{{$leave->length }}</td>
                                 <td><a class="" title="edit" class="btn btn-icon btn-info" id="{{$leave->id}}"
                                        onclick="prepareLEditData(this.id);"><i class="fa fa-pencil"
                                                                                aria-hidden="true"></i></a>
