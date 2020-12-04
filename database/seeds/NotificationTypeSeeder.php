@@ -62,9 +62,9 @@ $this->seedPoll();
 //        \App\PermissionCategory::whereIn('id', [22,23])->delete();
         \App\PermissionCategory::updateOrCreate(['name'=>'Probation']);
         $permissions = [
-            ['name' => 'Issue Query', 'constant' => 'issue_query', 'permission_category_id' => 22],
-            ['name' => 'Query Escalation Settings', 'constant' => 'query_escalation_settings', 'permission_category_id' => 22],
-            ['name' => 'Manage Probation Policy', 'constant' => 'manage_probation_policy', 'permission_category_id' => 23]
+            ['name' => 'Issue Query', 'constant' => 'issue_query', 'permission_category_id' => 25],
+            ['name' => 'Query Escalation Settings', 'constant' => 'query_escalation_settings', 'permission_category_id' => 25],
+            ['name' => 'Manage Probation Policy', 'constant' => 'manage_probation_policy', 'permission_category_id' => 26]
         ];
         foreach ($permissions as $permission) {
             \App\Permission::create($permission);

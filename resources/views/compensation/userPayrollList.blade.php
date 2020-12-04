@@ -71,7 +71,7 @@ thead tr th{
                           <td>{{$sn}}</td>
                         <td>{{$detail->user->emp_num}}</td>
                         <td>{{$detail->user->name}}</td>
-                        <td>{{$detail->user->promotionHistories()->latest()->first()->grade->level}}</td>
+                        <td>{{$detail->user->grade->level}}</td>
                         <td>{{$detail->gross_pay}}</td>
                         
                         <td>{{date("F", mktime(0, 0, 0, $detail->payroll->month, 10))}}-{{$detail->payroll->year}}</td>

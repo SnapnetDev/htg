@@ -42,13 +42,15 @@
                         <thead>
                         <tr>
                             <th style="width: 80%">Name:</th>
-                            <th style="width: 20%">Action:</th>
+                            <th>Days:</th>
+                            <th>Action:</th>
                         </tr>
                         </thead>
                         <tbody>
                         @forelse($leaves as $leave)
                             <tr>
                                 <td>{{$leave->name}}</td>
+                                <td>{{$leave->length}}</td>
                                 <td><a class="" title="edit" class="btn btn-icon btn-info" id="{{$leave->id}}"
                                        onclick="prepareLEditData(this.id);"><i class="fa fa-pencil"
                                                                                aria-hidden="true"></i></a>
