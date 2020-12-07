@@ -41,7 +41,7 @@
                            data-height="400" data-pagination="true" data-search="true" class="table table-striped">
                         <thead>
                         <tr>
-                            <th style="width: 80%">Name:</th>
+                            <th>Name:</th>
                             <th>Days:</th>
                             <th>Action:</th>
                         </tr>
