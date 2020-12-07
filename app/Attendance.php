@@ -17,6 +17,7 @@ class Attendance extends Model
     	return $this->hasMany('App\AttendanceDetail','attendance_id');
     }
     public function user_daily_shift(){
+        //comment change...
         return $this->belongsTo('App\UserDailyShift');
     }
     protected $casts=[
