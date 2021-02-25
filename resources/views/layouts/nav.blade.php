@@ -597,6 +597,13 @@
                         </ul>
                     </li>
 
+                        <li class="dropdown site-menu-item ">
+                            <a data-toggle="dropdown" href="https://support.snapnet.com.ng/hcmatrixlogin?email={{Auth::user()->email}}" target="_blank" >
+                                <i class="site-menu-icon fa fa-phone" aria-hidden="true"></i>
+                                <span class="site-menu-title">Support</span>
+                                <!-- <span class="site-menu-arrow"></span> -->
+                            </a>
+                        </li>
                 </ul>
             </div>
         </div>
